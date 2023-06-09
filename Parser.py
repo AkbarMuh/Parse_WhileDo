@@ -52,7 +52,7 @@ def lexicalAnalyzer(kalimat):
     tabel_transisi['q32', 'r'] = 'q31'
     tabel_transisi['q31', 'u'] = 'q32'
     tabel_transisi['q32', 'e'] = 'q31'
-    tabel_transisi['q31', ' '] = 'q6'
+    tabel_transisi['q31', ' '] = 'q7'
     #<False>
     tabel_transisi['q1', 'f'] = 'q32'
     tabel_transisi['q32', 'a'] = 'q31'

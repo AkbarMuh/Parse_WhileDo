@@ -108,7 +108,7 @@ def lexicalAnalyzer(kalimat):
     baca_kali = " * "
     for i in baca_kali :
         tabel_transisi['q8', i] = 'q8'
-
+    
     #<angka>/<variabel>
     for i in angka:
         tabel_transisi['q8', str(i)] = 'q9'

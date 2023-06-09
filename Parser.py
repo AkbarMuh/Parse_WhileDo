@@ -12,13 +12,14 @@ def lexicalAnalyzer(kalimat):
 
     # initialization
     list_input = list(string.ascii_lowercase)
-    list_state = ['q0', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8',
+    list_state = ['q0','q00', 'q01', 'q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7', 'q8',
                   'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15', 'q16',
                   'q17', 'q18', 'q19', 'q20', 'q21', 'q22', 'q23', 'q24',
                   'q25', 'q26', 'q27', 'q28', 'q29', 'q30', 'q31', 'q32',
                   'q33', 'q34', 'q35', 'q36', 'q37', 'q38', 'q39', 'q40', 'q41']
 
-    variable = ['a','b']
+    variable = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
+    arithmetic = ['+','-','*','/','%']
     angka = ['0','1','2','3','4','5','6','7','8','9']
     simbol = ['<','>','=','!']
 
@@ -33,9 +34,11 @@ def lexicalAnalyzer(kalimat):
     tabel_transisi['q0', ' '] = 'q0'
 
     #<while>
-    baca_while = "while"
-    for i in baca_while :
-        tabel_transisi['q0', i] = 'q0'
+    tabel_transisi['q0', 'w'] = 'q00'
+    tabel_transisi['q00', 'h'] = 'q01'
+    tabel_transisi['q01', 'i'] = 'q00'
+    tabel_transisi['q00', 'l'] = 'q01'
+    tabel_transisi['q01', 'e'] = 'q0'
 
     #<space>
     tabel_transisi['q0', ' '] = 'q1'
@@ -44,20 +47,19 @@ def lexicalAnalyzer(kalimat):
     for i in variable:
         tabel_transisi['q1', str(i)] = 'q2'
 
-    
-    #<True/False>
-    tabel_transisi['q1', 't'] = 'q12'
-    tabel_transisi['q12', 'r'] = 'q11'
-    tabel_transisi['q11', 'u'] = 'q12'
-    tabel_transisi['q12', 'e'] = 'q11'
-    tabel_transisi['q11', ' '] = 'q6'
-
-    tabel_transisi['q1', 'f'] = 'q12'
-    tabel_transisi['q12', 'a'] = 'q11'
-    tabel_transisi['q11', 'l'] = 'q12'
-    tabel_transisi['q12', 's'] = 'q11'
-    tabel_transisi['q11', 'e'] = 'q12'
-    tabel_transisi['q12', ' '] = 'q6'
+    #<True>
+    tabel_transisi['q1', 't'] = 'q32'
+    tabel_transisi['q32', 'r'] = 'q31'
+    tabel_transisi['q31', 'u'] = 'q32'
+    tabel_transisi['q32', 'e'] = 'q31'
+    tabel_transisi['q31', ' '] = 'q6'
+    #<False>
+    tabel_transisi['q1', 'f'] = 'q32'
+    tabel_transisi['q32', 'a'] = 'q31'
+    tabel_transisi['q31', 'l'] = 'q32'
+    tabel_transisi['q32', 's'] = 'q31'
+    tabel_transisi['q31', 'e'] = 'q32'
+    tabel_transisi['q32', ' '] = 'q7'
 
     #<space>      
     tabel_transisi['q2', ' '] = 'q3'
@@ -84,44 +86,67 @@ def lexicalAnalyzer(kalimat):
     for i in variable:
         tabel_transisi['q5', str(i)] = 'q6'
     
-    #< do >
-    baca_do = " do "
-    for i in baca_do :
-        tabel_transisi['q6', i] = 'q6'
-
-    #<variabel>
-    for i in variable:
-        tabel_transisi['q6', str(i)] = 'q7'
-
-    #< = >
-    baca_samadengan = " = "
-    for i in baca_samadengan :
-        tabel_transisi['q7', i] = 'q7'
-
-    #<angka>/<variabel>
-    for i in angka:
-        tabel_transisi['q7', str(i)] = 'q8'
-    for i in variable:
-        tabel_transisi['q7', str(i)] = 'q8'
+    #<space>
+    tabel_transisi['q6', ' '] = 'q7'
     
-    #< * >
-    baca_kali = " * "
-    for i in baca_kali :
-        tabel_transisi['q8', i] = 'q8'
-    
-    #<angka>/<variabel>
-    for i in angka:
-        tabel_transisi['q8', str(i)] = 'q9'
-    for i in variable:
-        tabel_transisi['q8', str(i)] = 'q9'
-    
+    #<do>
+    tabel_transisi['q7', 'd'] = 'q8'
+    tabel_transisi['q8', 'o'] = 'q9'
+
     #<space>
     tabel_transisi['q9', ' '] = 'q10'
 
-    baca_endwhile = "endwhile"
-    for i in baca_endwhile:
-        tabel_transisi['q10', i] = 'q10'
-    tabel_transisi['q10', '#'] = 'accept'
+    #<variabel>
+    for i in variable:
+        tabel_transisi['q10', str(i)] = 'q11'
+
+    #<space>
+    tabel_transisi['q11', ' '] = 'q12'
+
+    #< = >
+    tabel_transisi['q12', '='] = 'q13'
+
+    #<space>
+    tabel_transisi['q13', ' '] = 'q14'
+
+    #<angka>/<variabel>
+    for i in angka:
+        tabel_transisi['q14', str(i)] = 'q15'
+    for i in variable:
+        tabel_transisi['q14', str(i)] = 'q15'
+    
+    #<space>
+    tabel_transisi['q15', ' '] = 'q16'
+
+    #<arithmetic>
+    for i in arithmetic:
+        if i == '/' or i == '*' :
+            tabel_transisi['q16', i] = 'q17'
+            tabel_transisi['q17', i] = 'q17'
+        tabel_transisi['q16', i] = 'q17'
+
+    #<space>
+    tabel_transisi['q17', ' '] = 'q18'
+    
+    #<angka>/<variabel>
+    for i in angka:
+        tabel_transisi['q18', str(i)] = 'q19'
+    for i in variable:
+        tabel_transisi['q18', str(i)] = 'q19'
+    
+    #<space>
+    tabel_transisi['q19', ' '] = 'q20'\
+    
+    #<endwhile>
+    tabel_transisi['q20', 'e'] = 'q22'
+    tabel_transisi['q22', 'n'] = 'q21'
+    tabel_transisi['q21', 'd'] = 'q22'
+    tabel_transisi['q22', 'w'] = 'q21'
+    tabel_transisi['q21', 'h'] = 'q22'
+    tabel_transisi['q22', 'i'] = 'q21'
+    tabel_transisi['q21', 'l'] = 'q22'
+    tabel_transisi['q22', 'e'] = 'q21'
+    tabel_transisi['q21', '#'] = 'accept'
  
     # lexical analisis
     idx_char = 0
@@ -147,4 +172,4 @@ try:
 except:
     st.success("Kamu Salah")
  
-st.text(" Grammar: \n<statement> ::= if <kondisi> then <aksi> endif \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> * <variabel>\n<variabel> ::= a | b \n<operator> ::= == | >= | <= | < | >")
+st.text(" Grammar: \n<statement> ::= if <kondisi> then <aksi> endif \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | %\n<operator> ::= == | >= | <= | < | >")

@@ -115,10 +115,13 @@ def lexicalAnalyzer(kalimat):
     for i in variable:
         tabel_transisi['q8', str(i)] = 'q9'
     
-    baca_endwhile = " endwhile"
+    #<space>
+    tabel_transisi['q9', ' '] = 'q10'
+
+    baca_endwhile = "endwhile"
     for i in baca_endwhile:
-        tabel_transisi['q9', i] = 'q9'
-    tabel_transisi['q9', '#'] = 'accept'
+        tabel_transisi['q10', i] = 'q10'
+    tabel_transisi['q10', '#'] = 'accept'
  
     # lexical analisis
     idx_char = 0

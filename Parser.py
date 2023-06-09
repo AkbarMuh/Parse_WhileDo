@@ -172,4 +172,4 @@ try:
 except:
     st.success("Kamu Salah")
  
-st.text(" Grammar: \n<statement> ::= if <kondisi> then <aksi> endif \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | %\n<operator> ::= == | >= | <= | < | >")
+st.text(" Grammar: \n<statement> ::= while <kondisi> do <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")

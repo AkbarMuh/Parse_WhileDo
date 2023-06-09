@@ -2,10 +2,8 @@ import streamlit as st
 import string
 
 st.write("""
-# TBA
-Saya Akbar
-while - do |
-while <KONDISI> do <AKSI> endwhile
+# TBA - Parser 'while do'
+Saya AkbarMuh | while <KONDISI> do <AKSI> endwhile
 """)
 def lexicalAnalyzer(kalimat):
     input_string = str(kalimat.lower()+'#')
@@ -163,7 +161,7 @@ def lexicalAnalyzer(kalimat):
     if state == 'accept':
         return True
 
-hasil = st.text_input("Hasil Code","while a < 1 do a = a * b endwhile")
+hasil = st.text_input("Copas Hasil Code Kesini","while a < 1 do a = a * b endwhile")
 try:
     if lexicalAnalyzer(hasil) :
         st.success("Anda Benar")

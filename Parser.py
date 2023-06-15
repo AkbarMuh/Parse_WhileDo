@@ -2,11 +2,12 @@ import streamlit as st
 import string
 
 st.write("""
-# TBA - Parser 'while do'
-Saya AkbarMuh | while <KONDISI> do <AKSI> endwhile
+# TBA - Parser 'while do' in Python 
+Saya AkbarMuh | while <KONDISI> : <AKSI>
 """)
+st.text("while <KONDISI>:\n     <AKSI>")
 def lexicalAnalyzer(kalimat):
-    input_string = str(kalimat.lower()+'#')
+    input_string = str(kalimat.lower()+' #')
 
     # initialization
     list_input = list(string.ascii_lowercase)
@@ -14,7 +15,9 @@ def lexicalAnalyzer(kalimat):
                   'q9', 'q10', 'q11', 'q12', 'q13', 'q14', 'q15', 'q16',
                   'q17', 'q18', 'q19', 'q20', 'q21', 'q22', 'q23', 'q24',
                   'q25', 'q26', 'q27', 'q28', 'q29', 'q30', 'q31', 'q32',
-                  'q33', 'q34', 'q35', 'q36', 'q37', 'q38', 'q39', 'q40', 'q41']
+                  'q33', 'q34', 'q35', 'q36', 'q37', 'q38', 'q39', 'q40', 
+                  'q41', 'q42', 'q43', 'q44', 'q45', 'q46', 'q47', 'q48',
+                  'q49', 'q50']
 
     variable = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     arithmetic = ['+','-','*','/','%']
@@ -89,10 +92,12 @@ def lexicalAnalyzer(kalimat):
     
     #<do>
     tabel_transisi['q7', 'd'] = 'q8'
+    tabel_transisi['q7', ':'] = 'q9'
     tabel_transisi['q8', 'o'] = 'q9'
 
     #<space>
     tabel_transisi['q9', ' '] = 'q10'
+    tabel_transisi['q10', ' '] = 'q10'
 
     #<variabel>
     for i in variable:
@@ -132,36 +137,26 @@ def lexicalAnalyzer(kalimat):
     for i in variable:
         tabel_transisi['q18', str(i)] = 'q19'
     
-    #<space>
-    tabel_transisi['q19', ' '] = 'q20'\
-    
-    #<endwhile>
-    tabel_transisi['q20', 'e'] = 'q22'
-    tabel_transisi['q22', 'n'] = 'q21'
-    tabel_transisi['q21', 'd'] = 'q22'
-    tabel_transisi['q22', 'w'] = 'q21'
-    tabel_transisi['q21', 'h'] = 'q22'
-    tabel_transisi['q22', 'i'] = 'q21'
-    tabel_transisi['q21', 'l'] = 'q22'
-    tabel_transisi['q22', 'e'] = 'q21'
-    tabel_transisi['q21', '#'] = 'accept'
+    #<space + #>
+    tabel_transisi['q19', ' '] = 'q20'
+    tabel_transisi['q20', '#'] = 'accept'
+    tabel_transisi['q20', ' '] = 'q10'
  
     # lexical analisis
     idx_char = 0
     state = 'q0'
-    current_token = ''
+    token_ygSekarang = ''
     while state != 'accept':
-        current_char = input_string[idx_char]
-        current_token += current_char
-        state = tabel_transisi[(state, current_char)]
+        titik_Sekarang = input_string[idx_char]
+        token_ygSekarang += titik_Sekarang
+        state = tabel_transisi[(state, titik_Sekarang)]
         if state == 'error':
             return False
-            break
         idx_char = idx_char + 1
     if state == 'accept':
         return True
 
-hasil = st.text_input("Copas Hasil Code Kesini","while a < 1 do a = a * b endwhile")
+hasil = st.text_input("Copas Hasil Code Kesini (1 Line)","while a < 1 : a = a * b")
 try:
     if lexicalAnalyzer(hasil) :
         st.success("Anda Benar")
@@ -169,5 +164,16 @@ try:
         st.success("Kamu Salah")
 except:
     st.success("Kamu Salah")
+
+txt = st.text_area("Test Kalo Code beda line", "while a < 1 :\n     a = a * b")
+txt = txt.replace("\n",'')
+
+try:
+    if lexicalAnalyzer(txt) :
+        st.success("Anda Benar")
+    else:
+        st.success("Kamu Salah")
+except:
+    st.success("Kamu Salah")
  
-st.text(" Grammar: \n<statement> ::= while <kondisi> do <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")
+st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")

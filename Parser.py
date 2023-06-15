@@ -163,7 +163,7 @@ try:
     else:
         st.success("Kamu Salah")
 except:
-    st.success("Kamu Salah")
+    st.success("Kamu Jelek")
 
 txt = st.text_area("Test Kalo Code beda line", "while a < 1 :\n     a = a * b")
 txt = txt.replace("\n",'')
@@ -174,6 +174,6 @@ try:
     else:
         st.success("Kamu Salah")
 except:
-    st.success("Kamu Salah")
+    st.success("Kamu Jelek")
  
 st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")

@@ -158,8 +158,20 @@ def lexicalAnalyzer(kalimat):
     if state == 'accept':
         return True
     
-hasil = st.text_input("Copas Hasil Code Kesini (1 Line)","while a < 1 : a = a * b")
+css = r'''
+    <style>
+        [data-testid="stForm"] {border: 0px}
+    </style>
+'''
 
+st.markdown(css, unsafe_allow_html=True)
+st.write("""
+##### Parsing Code 1 Line
+""")
+
+with st.form("my_form"):
+   hasil = st.text_input("Copas Hasil Code Kesini (1 Line)","while a < 1 : a = a * b")
+   submitted = st.form_submit_button("Ini Tombol Submit")
 try:
     if lexicalAnalyzer(hasil) :
         st.success("Anda Benar")
@@ -167,9 +179,15 @@ try:
         st.success("Kamu Salah")
 except:
     st.success("Kamu Jelek")
-    
-txt = st.text_area("Test Kalo Code beda line", "while a < 1 :\n     a = a * b")
-txt = txt.replace("\n",'')
+\
+st.text("\n")
+st.write("""
+##### Parsing Code Umum
+""")
+with st.form("my_form2"):   
+    txt = st.text_area("Test Kalo Code beda line", "while a < 1 :\n     a = a * b")
+    txt = txt.replace("\n",'')
+    submitted = st.form_submit_button("Ini Tombol Submit")
 try:
     if lexicalAnalyzer(txt) :
         st.success("Anda Benar")
@@ -178,7 +196,7 @@ try:
 except:
     st.success("Kamu Jelek")
 
-st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")
+st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel/angka>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel/angka> <arithmetic> <variabel/angka>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z\n<angka> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")
 
 txt = txt.split(' ')
 st.write("""
@@ -186,6 +204,10 @@ st.write("""
 """)
 n =  0
 for i in txt:
-    if i != txt[5]:
+    try :
+        if i != txt[5]:
+            st.write(n,i)
+            n = n +1
+    except:
         st.write(n,i)
         n = n +1

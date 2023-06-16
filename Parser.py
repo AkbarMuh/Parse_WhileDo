@@ -1,5 +1,7 @@
 import streamlit as st
 import string
+import pandas as pd
+import numpy as np
 
 st.write("""
 # TBA - Parser 'while do' in Python 
@@ -155,8 +157,9 @@ def lexicalAnalyzer(kalimat):
         idx_char = idx_char + 1
     if state == 'accept':
         return True
-
+    
 hasil = st.text_input("Copas Hasil Code Kesini (1 Line)","while a < 1 : a = a * b")
+
 try:
     if lexicalAnalyzer(hasil) :
         st.success("Anda Benar")
@@ -164,10 +167,9 @@ try:
         st.success("Kamu Salah")
 except:
     st.success("Kamu Jelek")
-
+    
 txt = st.text_area("Test Kalo Code beda line", "while a < 1 :\n     a = a * b")
 txt = txt.replace("\n",'')
-
 try:
     if lexicalAnalyzer(txt) :
         st.success("Anda Benar")
@@ -175,5 +177,15 @@ try:
         st.success("Kamu Salah")
 except:
     st.success("Kamu Jelek")
- 
+
 st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel> <arithmetic> <variabel>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")
+
+txt = txt.split(' ')
+st.write("""
+##### Hasil Parse
+""")
+n =  0
+for i in txt:
+    if i != txt[5]:
+        st.write(n,i)
+        n = n +1

@@ -5,7 +5,7 @@ import numpy as np
 
 st.write("""
 # TBA - Parser 'while do' in Python 
-Saya AkbarMuh | while <KONDISI> : <AKSI>
+Kelompok 4 | while <KONDISI> : <AKSI>
 """)
 st.text("while <KONDISI>:\n     <AKSI>")
 
@@ -216,10 +216,10 @@ def ParserAnalyzer(kalimat,Parser,FA):
     tabel_transisi['q00', 'h'] = 'q01'
     tabel_transisi['q01', 'i'] = 'q00'
     tabel_transisi['q00', 'l'] = 'q01'
-    tabel_transisi['q01', 'e'] = 'q0'
+    tabel_transisi['q01', 'e'] = 'q1'
 
     #<space>
-    tabel_transisi['q0', ' '] = 'q1'
+    tabel_transisi['q1', ' '] = 'q1'
     
     #<variabel>
     for i in variable:
@@ -230,14 +230,14 @@ def ParserAnalyzer(kalimat,Parser,FA):
     tabel_transisi['q32', 'r'] = 'q31'
     tabel_transisi['q31', 'u'] = 'q32'
     tabel_transisi['q32', 'e'] = 'q31'
-    tabel_transisi['q31', ' '] = 'q7'
+    tabel_transisi['q31', ' '] = 'q6'
     #<False>
     tabel_transisi['q1', 'f'] = 'q32'
     tabel_transisi['q32', 'a'] = 'q31'
     tabel_transisi['q31', 'l'] = 'q32'
     tabel_transisi['q32', 's'] = 'q31'
     tabel_transisi['q31', 'e'] = 'q32'
-    tabel_transisi['q32', ' '] = 'q7'
+    tabel_transisi['q32', ' '] = 'q6'
 
     #<space>      
     tabel_transisi['q2', ' '] = 'q2'
@@ -418,7 +418,7 @@ st.write("""
 
 list_of_tuples = list(zip(FA, Parser))
 df = pd.DataFrame(
-    list_of_tuples, columns=['State', 'Token']
+    list_of_tuples, columns=['State', 'Parse']
     )
 st.table(df)
 

@@ -240,36 +240,36 @@ def ParserAnalyzer(kalimat,Parser,FA):
     tabel_transisi['q32', ' '] = 'q7'
 
     #<space>      
-    tabel_transisi['q2', ' '] = 'q3'
+    tabel_transisi['q2', ' '] = 'q2'
 
     #<operator> 
     for i in simbol:
         if i == '=' or i == '!':
-            tabel_transisi['q3', str(i)] = 'q34'
+            tabel_transisi['q2', str(i)] = 'q34'
             for i in simbol :
                 tabel_transisi['q34', str(i)] = 'q4'                
         elif i == '<' or i == '>':
-            tabel_transisi['q3', '<'] = 'q4'
-            tabel_transisi['q3', '>'] = 'q4'
+            tabel_transisi['q2', '<'] = 'q4'
+            tabel_transisi['q2', '>'] = 'q4'
             tabel_transisi['q4', '='] = 'q4'
         else:
-            tabel_transisi['q3', str(i)] = 'q4'
+            tabel_transisi['q2', str(i)] = 'q4'
 
     #<space>
-    tabel_transisi['q4', ' '] = 'q5'
+    tabel_transisi['q4', ' '] = 'q4'
 
     #<angka>/<variabel>
     for i in angka:
-        tabel_transisi['q5', str(i)] = 'q6'
+        tabel_transisi['q4', str(i)] = 'q6'
     for i in variable:
-        tabel_transisi['q5', str(i)] = 'q6'
+        tabel_transisi['q4', str(i)] = 'q6'
     
     #<space>
-    tabel_transisi['q6', ' '] = 'q7'
+    tabel_transisi['q6', ' '] = 'q6'
     
     #<do>
-    tabel_transisi['q7', 'd'] = 'q8'
-    tabel_transisi['q7', ':'] = 'q9'
+    tabel_transisi['q6', 'd'] = 'q8'
+    tabel_transisi['q6', ':'] = 'q9'
     tabel_transisi['q8', 'o'] = 'q9'
 
     #<space>
@@ -285,6 +285,7 @@ def ParserAnalyzer(kalimat,Parser,FA):
     tabel_transisi['q42', 'i'] = 'q43'
     tabel_transisi['q43', 'n'] = 'q44'
     tabel_transisi['q44', 't'] = 'q45'
+    tabel_transisi['q45', ' '] = 'q45'
     tabel_transisi['q45', '('] = 'q47'
 
     #<angka>/<variabel>
@@ -400,7 +401,7 @@ st.write("""
 Parser = []
 FA = []
 with st.form("my_form2"):   
-    txt = st.text_area("Copas Code kesini", "while a < 1 :\n     print(a)")
+    txt = st.text_area("Copas Code kesini", "while a < 1 :\n     print(a)\n     a = b + c")
     txt = txt.replace("\n",'')
     submitted = st.form_submit_button("Ini Tombol Submit")
 try:
@@ -433,4 +434,4 @@ st.table(df)
 
 
 
-st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel/angka>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel/angka> <arithmetic> <variabel/angka>\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z\n<angka> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")
+st.text(" Grammar: \n<statement> ::= while <kondisi> : <aksi> endwhile \n<kondisi> ::= <variabel> <operator> <variabel/angka>\n<kondisi> ::= true | false\n<aksi> ::= <variabel> = <variabel/angka> <arithmetic> <variabel/angka>\n<aksi> ::= print(<variabel/angka>)\n<variabel> ::= a | b | c | d | e | f | g | h | i | j | k | l | m | n | o | p | q | r | s | t | u | v | w | x | y | z\n<angka> ::= 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 0 \n<arithmetic> ::= + | - | * | / | % | ** | //\n<operator> ::= == | >= | <= | < | > | != | ==")
